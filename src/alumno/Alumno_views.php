@@ -4,15 +4,18 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 3) {
     header('Location: ../../index.php');
     exit();
 }
+include("../accions/connection.php");
+
 
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/dist//output.css">
+    <script src="../accions/modal_salir.js" defer></script>
 </head>
 <body>
     <div class="w-screen h-screen flex">
@@ -36,7 +39,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 3) {
             <nav class="flex h-10 w-full  flex-row justify-between items-center">
                 <div class=" flex flex-row justify-items-stretch">
                     <button class="relative  flex flex-row items-center group">
-                        <a href="./Alumno_views.php">
+                        <a href="./Alumno_views.php" class="flex flex-row items-center">
                             <img src="../assets/home.svg" alt="icono menu" width="18px" height="18px px-2">
                             <p class="px-4"> Home </p>
                         </a>
@@ -49,15 +52,21 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 3) {
                     </button>
                 </div>
                 <div class=" flex flex-row justify-between items-center">
-                    <button class="relative flex justify-center items-center group">
-                        <p class="px-4"> Alumno Name </p>
-                        <div class="absolute hidden group-focus:block top-full min-w-full w-max bg-white mt-1 rounded">
+                     <button id="buttonToggle" class="relative flex justify-center items-center group">
+                        <p class="px-4"> Alumno </p>
+                        <div id="toggleMenu" class=" absolute top-full min-w-full w-max bg-white mt-1 rounded hidden">
+
                             <ul class="text-left border none">
-                                <li class="px-4 py-1 border-b flex flex-row gap-3"><img src="../assets/person.svg" alt=""> Perfil</li>
-                                <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../assets/cerrar.svg" alt="">Salir </li>
+                                <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../assets/person.svg" alt="">
+                                    Perfil </li>
+                                <a href="../accions/logout.php">
+                                    <li class="px-4 py-1 border-b flex flex-row gap-3"><img src="../assets/cerrar.svg" alt="">
+                                        Salir
+                                    </li>
+                                </a>
                             </ul>
                         </div>
-                        <img src="../assets/linias.svg" alt="icono flecha" width="16px" height="16px">
+                        <img src="../assets/linias.svg" alt="icono flecha" width="18px" height="18px">
                     </button>
                 </div>
             </nav>

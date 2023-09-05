@@ -2,18 +2,20 @@
 session_start();
 if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 1) {
     header('Location: ../index.php');
-    // Redirigir si no se cumple la condición
     exit();
 }
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/dist//output.css">
+    <script src="../accions/modal_salir.js" defer></script>
 </head>
+
 <body>
     <div class="w-screen h-screen flex">
         <div class="flex h-full bg-blue-900 text-white w-60  py-6 flex-col justify-between">
@@ -34,7 +36,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 1) {
                         <p class=" px-4"> Maestros </p>
                     </a>
                     <a href="./crud_alumno/admin_views_alum.php" class=" flex flex-row justify-center  group">
-                    <img src="../assets/alumno.svg" alt="" height="32px" width="32px">
+                        <img src="../assets/alumno.svg" alt="" height="32px" width="32px">
                         <p class="px-4"> Alumnos </p>
                     </a>
                     <a href="./crud_clases/admin_views_clases.php" class=" flex flex-row justify-center group">
@@ -44,16 +46,10 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 1) {
                 </div>
             </div>
         </div>
-
         <div class="flex flex-col w-[calc(100%-15rem)] px-2">
-            <!-- Contenido topnav -->
             <nav class="flex h-10 w-full  flex-row justify-between items-center">
-
-
                 <div class=" flex flex-row justify-items-stretch">
-
                     <a href="./admin_db.php" class="relative flex flex-row items-center group">
-
                         <img src="../assets/home.svg" alt="icono menu" width="18px" height="18px px-2">
                         <p class="px-4"> Home </p>
                         <div class="absolute hidden group-focus:block top-full min-w-full w-max bg-white  mt-1 rounded">
@@ -63,21 +59,17 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 1) {
                                 <li class=" px-4 py-1"><a href="Adm_Das_Alum.php"></a> Alumnos</li>
                                 <li class=" px-4 py-1"><a href="Adm_Das_Class.php"></a> Clases</li>
                             </ul>
-
                         </div>
-
                     </a>
                 </div>
-
                 <div class=" flex flex-row justify-between items-center">
-
                     <button id="buttonToggle" class="relative flex justify-center items-center group">
                         <p class="px-4"> administrador </p>
                         <div id="toggleMenu" class=" absolute top-full min-w-full w-max bg-white mt-1 rounded hidden">
 
                             <ul class="text-left border none">
                                 <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../assets/person.svg" alt="">
-                                   Perfil </li>
+                                    Perfil </li>
                                 <a href="../accions/logout.php">
                                     <li class="px-4 py-1 border-b flex flex-row gap-3"><img src="../assets/cerrar.svg" alt="">
                                         Salir
@@ -88,15 +80,9 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 1) {
                         <img src="../assets/linias.svg" alt="icono flecha" width="18px" height="18px">
                     </button>
                 </div>
-
-
-
             </nav>
             <section class=" h-screen bg-blue-50">
                 <div class="flex  w-full flex-row justify- items-center    ">
-                    <!-- Contenido Dashboard -->
-
-                    <!-- top nav -->
                     <div class="flex h-10 w-full  flex-row justify-between items-center">
                         <h1 class="text-xl"> Dashboard</h1>
                         <div>
@@ -104,13 +90,8 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 1) {
                             <span>Dashboard</span>
                         </div>
                     </div>
-
-
-
                 </div>
-
                 <div class="w-1/2 items-start">
-
                     <div class="w-120 h-20 bg-white border border-gray-300 shadow-md flex flex-col justify-center items-start text-sm p-4">
                         <p>Bienvenido!<br> Selecciona la acción que quieras realizar en las pestañas del menú de la
                             izquierda</p>
@@ -118,16 +99,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 1) {
                 </div>
             </section>
         </div>
-
     </div>
-
-    <script>
-        buttonToggle.addEventListener('click', () => {
-            toggleMenu.classList.toggle('hidden');
-        })
-    </script>
-
-
 
 </body>
 

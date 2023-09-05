@@ -17,11 +17,14 @@ $result = $mysqli->query($query);
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/dist//output.css">
+    <script src="../accions/modal_salir.js" defer></script>
 </head>
+
 <body>
     <div class="w-screen h-screen flex">
         <div class="flex h-full bg-blue-900 text-white w-60  py-6 flex-col justify-between">
@@ -52,15 +55,21 @@ $result = $mysqli->query($query);
                     </a>
                 </div>
                 <div class=" flex flex-row justify-between items-center">
-                    <button class="relative flex justify-center items-center group">
-                        <p class="px-4"> Alumno</p>
-                        <div class="absolute hidden group-focus:block top-full min-w-full w-max bg-white mt-1 rounded">
+                    <button id="buttonToggle" class="relative flex justify-center items-center group">
+                        <p class="px-4"> Alumno </p>
+                        <div id="toggleMenu" class=" absolute top-full min-w-full w-max bg-white mt-1 rounded hidden">
+
                             <ul class="text-left border none">
-                                <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../assets/person.svg" alt=""> Perfil</li>
-                                <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../assets/cerrar.svg" alt="">Salir </li>
+                                <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../assets/person.svg" alt="">
+                                    Perfil </li>
+                                <a href="../accions/logout.php">
+                                    <li class="px-4 py-1 border-b flex flex-row gap-3"><img src="../assets/cerrar.svg" alt="">
+                                        Salir
+                                    </li>
+                                </a>
                             </ul>
                         </div>
-                        <img src="../assets/linias.svg" alt="icono flecha" width="16px" height="16px">
+                        <img src="../assets/linias.svg" alt="icono flecha" width="18px" height="18px">
                     </button>
                 </div>
             </nav>
@@ -104,27 +113,23 @@ $result = $mysqli->query($query);
                             </table>
                         </div>
                     </div>
-                    <div class="w-1/4 pl-4">
+                    <form action="" method="post" class="w-1/4 pl-4">
                         <h2 class="text-lg font-bold mb-2">Materias para inscribir</h2>
                         <div class="shadow-md rounded-lg p-4 ">
                             <label class="block font-semibold mb-2">Selecciona las materias disponibles:</label>
                             <select multiple class="w-full border rounded-lg p-2 mb-4">
+                            
                                 <?php
-                                include('../accions/connection.php');
+                                include("../accions/connection.php");
 
-                                $queryAll = "SELECT m.id_materia, m.materia
-                                    FROM materias AS m
-                                    LEFT JOIN alumno_materias AS am ON m.id_materia = am.id_materia
-                                     LEFT JOIN usuarios AS u ON am.id_alumno = u.id_usuario
-                                     WHERE u.rol_id IS NULL OR u.rol_id != 3";
-
-                                $select = $mysqli->query($queryAll);
-
-                                if ($select->num_rows > 0) {
-                                    while ($row = $select->fetch_assoc()) {
-                                        var_dump($row);
+                                $materiaquery = "SELECT * FROM materias";
+                                
+                                $resultmateria = $mysqli->query($materiaquery);
+                                if ($resultmateria->num_rows > 0) {
+                                    while ($row = $resultmateria->fetch_assoc()) {
                                 ?>
-                                        <option value="<?= $row['id_materia'] ?>"><?= $row['materia'] ?></option>
+                                        <option value="<?= $row['id_materia'] ?>"><?= $row['materia'] ?>
+                                        </option>
                                 <?php
                                     }
                                 }
@@ -133,7 +138,7 @@ $result = $mysqli->query($query);
                             </select>
                             <button class="bg-blue-500 text-white px-3 py-1 rounded-lg ">Inscribirse</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </section>
         </div>

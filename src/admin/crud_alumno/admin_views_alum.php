@@ -12,6 +12,7 @@ if ($_SESSION['user']['rol_id'] != 1) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/dist//output.css">
     <script src="../../accions/modales.js" defer></script>
+    <script src="../../accions/modal_salir.js" defer></script>
 </head>
 <body>
     <div class="w-screen h-screen flex">
@@ -51,15 +52,19 @@ if ($_SESSION['user']['rol_id'] != 1) {
                         <p class="px-4"> Home </p>
                     </a>
                 </div>
-
                 <div class=" flex flex-row justify-between items-center">
+                <button id="buttonToggle" class="relative flex justify-center items-center group">
+                        <p class="px-4"> administrador </p>
+                        <div id="toggleMenu" class=" absolute top-full min-w-full w-max bg-white mt-1 rounded hidden">
 
-                    <button class="relative flex justify-center items-center group">
-                        <p class="px-4"> Administrador </p>
-                        <div class="absolute hidden group-focus:block top-full min-w-full w-max bg-white mt-1 rounded">
                             <ul class="text-left border none">
-                                <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../../assets/person.svg" alt=""> Perfil </li>
-                                <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../../assets/cerrar.svg" alt="">Salir </li>
+                                <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../../assets/person.svg" alt="">
+                                    Perfil </li>
+                                <a href="../../accions/logout.php">
+                                    <li class="px-4 py-1 border-b flex flex-row gap-3"><img src="../../assets/cerrar.svg" alt="">
+                                        Salir
+                                    </li>
+                                </a>
                             </ul>
                         </div>
                         <img src="../../assets/linias.svg" alt="icono flecha" width="18px" height="18px">
@@ -76,7 +81,7 @@ if ($_SESSION['user']['rol_id'] != 1) {
                         </div>
                     </div>
                 </div>
-                <div class="max-w-4xl mx-auto p-8 bg-white rounded shadow-lg mt-8">
+                <div class="max-w-full mx-auto p-8 bg-white rounded shadow-lg mt-8">
                     <div class="flex justify-between mb-4">
                         <h2 class="text-2xl font-semibold">Informacion Alumnos</h2>
                         <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer" id="abrirModal">Agregar Alumno</button>
