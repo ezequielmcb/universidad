@@ -1,6 +1,6 @@
 # universidad
 pagina para una universidad
 
-Le agrege la opcion al maestro de que le deje un comentario al alumno y tambien que le edite la calificacion.
+el maestro puede agregarle comentario y editar las calificaciones y el alumno puede ver las calificaciones
 
 hay modals en todo el programa.
