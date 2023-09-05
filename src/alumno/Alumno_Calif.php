@@ -96,7 +96,6 @@ $result = $mysqli->query($query);
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     <?php
                                     while ($row = $result->fetch_assoc()) {
                                         echo "<tr class='bg-white'>";
@@ -118,7 +117,6 @@ $result = $mysqli->query($query);
                         <div class="shadow-md rounded-lg p-4 ">
                             <label class="block font-semibold mb-2">Selecciona las materias disponibles:</label>
                             <select multiple class="w-full border rounded-lg p-2 mb-4">
-                            
                                 <?php
                                 include("../accions/connection.php");
 
@@ -134,7 +132,6 @@ $result = $mysqli->query($query);
                                     }
                                 }
                                 ?>
-
                             </select>
                             <button class="bg-blue-500 text-white px-3 py-1 rounded-lg ">Inscribirse</button>
                         </div>
@@ -144,5 +141,4 @@ $result = $mysqli->query($query);
         </div>
     </div>
 </body>
-
 </html>
