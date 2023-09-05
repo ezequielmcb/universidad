@@ -69,6 +69,7 @@
                                         <th class="py-2 px-3 text-center">#</th>
                                         <th class="py-2 px-3 text-center">Materia</th>
                                         <th class="py-2 px-3 text-center">Calificacion</th>
+                                        <th class="py-2 px-3 text-center">Mensaje del maestro</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,7 +77,7 @@
                                     <?php
                                     include('../accions/connection.php');
 
-                                    $query  = "SELECT m.id_materia, m.materia, am.calificacion
+                                    $query  = "SELECT m.id_materia, m.materia, am.calificacion, am.mensajes
                                     FROM materias AS m
                                     JOIN alumnos_materias AS am ON m.id_materia = am.id_alumate
                                     JOIN usuarios AS u ON am.id_alumno = u.id_user
@@ -89,7 +90,7 @@
                                         echo "<td class='py-2 px-4 border-r'>" . $row['id_materia'] . "</td>";
                                         echo "<td class='py-2 px-4 border-r'>" . $row['materia'] . "</td>";
                                         echo "<td class='py-2 px-4 border-r'>" . $row['calificacion'] . "</td>";
-                                        echo "<td class='py-2 px-4 border-r'>";
+                                        echo "<td class='py-2 px-4 border-r'>" . $row['mensajes'] . "</td>";
                                         echo "</td>";
                                         echo "</tr>";
                                     }
