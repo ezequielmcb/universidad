@@ -7,13 +7,15 @@ if ($_SESSION['user']['rol_id'] != 1) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/dist//output.css">
     <script src="../../accions/modales.js" defer></script>
     <script src="../../accions/modal_salir.js" defer></script>
 </head>
+
 <body>
     <div class="w-screen h-screen flex">
         <div class="flex h-full bg-blue-900 text-white w-60  py-6 flex-col justify-between">
@@ -43,7 +45,7 @@ if ($_SESSION['user']['rol_id'] != 1) {
                     </a>
                 </div>
             </div>
-        </div> 
+        </div>
         <div class="flex flex-col w-[calc(100%-15rem)] px-2">
             <nav class="flex h-10 w-full  flex-row justify-between items-center">
                 <div class=" flex flex-row justify-items-stretch">
@@ -53,7 +55,7 @@ if ($_SESSION['user']['rol_id'] != 1) {
                     </a>
                 </div>
                 <div class=" flex flex-row justify-between items-center">
-                <button id="buttonToggle" class="relative flex justify-center items-center group">
+                    <button id="buttonToggle" class="relative flex justify-center items-center group">
                         <p class="px-4"> administrador </p>
                         <div id="toggleMenu" class=" absolute top-full min-w-full w-max bg-white mt-1 rounded hidden">
 
@@ -84,6 +86,7 @@ if ($_SESSION['user']['rol_id'] != 1) {
                 <div class="max-w-full mx-auto p-8 bg-white rounded shadow-lg mt-8">
                     <div class="flex justify-between mb-4">
                         <h2 class="text-2xl font-semibold">Informacion Alumnos</h2>
+                        
                         <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer" id="abrirModal">Agregar Alumno</button>
                     </div>
                     <div class="modalAdd hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50">
@@ -93,7 +96,7 @@ if ($_SESSION['user']['rol_id'] != 1) {
                                 <form action="./agregar_alumno.php" method="POST">
                                     <div class="mb-4">
                                         <label for="dni" class="block font-medium">DNI:</label>
-                                        <input type="text" id="dni" name="dni" placeholder="Ingresa la Matricula" class="w-full border px-3 py-2 rounded focus:outline-none focus:ring focus:border-blue-300">
+                                        <input type="number" id="dni" name="dni" placeholder="Ingresa la Matricula" class="w-full border px-3 py-2 rounded focus:outline-none focus:ring focus:border-blue-300">
                                     </div>
                                     <div class="mb-4">
                                         <label for="correo" class="block font-medium">Correo Electrónico:</label>
@@ -114,10 +117,10 @@ if ($_SESSION['user']['rol_id'] != 1) {
                                     <div class="mb-4">
                                         <label for="fecha_nacimiento" class="block font-medium">Fecha de
                                             Nacimiento:</label>
-                                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="w-full border px-3 py-2 rounded focus:outline-none focus:ring focus:border-blue-300">
-                                    </div>
-                                    <div class="flex justify-end gap-2 mt-6">
-                                        <button type="button" class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500" id="cerrarModalAdd">Cerrar</button>
+                                            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="w-full border px-3 py-2 rounded focus:outline-none focus:ring focus:border-blue-300">
+                                        </div>
+                                        <div class="flex justify-end gap-2 mt-6">
+                                            <button type="button" class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500" id="cerrarModalAdd">Cerrar</button>
                                         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" id="createBtn">Crear</button>
                                     </div>
                                 </form>
@@ -144,7 +147,7 @@ if ($_SESSION['user']['rol_id'] != 1) {
 
                             $query  = "SELECT `id_user`,`dni`,`nombre`,`apellido`, `email`,`direccion`,`fecha_nacimiento` FROM usuarios LEFT Join login_user on id_user = id_users WHERE rol_id = 3;";
                             $result = $mysqli->query($query);
-
+                            
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr class='bg-white'>";
                                 echo "<td class='py-2 px-4 border-r'>" . $row['id_user'] . "</td>";
@@ -154,15 +157,16 @@ if ($_SESSION['user']['rol_id'] != 1) {
                                 echo "<td class='py-2 px-4 border-r'>" . $row['email'] . "</td>";
                                 echo "<td class='py-2 px-4 border-r'>" . $row['direccion'] . "</td>";
                                 echo "<td class='py-2 px-4 border-r'>" . $row['fecha_nacimiento'] . "</td>";
-                                echo "<td class='py-2 px-4 border-r'>";
-                                echo "<button class='text-blue-500 hover:underline' onclick='openUpdateModal(this)'>Editar</button>";
-                                echo " <form action='./delete_alumno.php' method='post'> <button class='text-red-500 hover:underline ml-2'>Eliminar</button> </form> ";
+                                echo "<td class='py-2 px-4 border-r flex items-center justify-center'>";
+                                echo "<button class='text-blue-500 hover:underline flex items-center justify-center' onclick='openUpdateModal(this)'><img src='../../assets/edit.svg' alt='edit'></button>";
+                                echo " <form action='./delete_alumno.php' method='post' class='flex items-center justify-center'>  <input type='hidden' class='editId'' name='editId'> <button class='deleteBtn text-red-500 hover:underline ml-2' ><img src='../../assets/delete.svg' alt='delete'></button> </form> ";
                                 echo "</td>";
                                 echo "</tr>";
                             }
-
+                            
                             $result->free();
                             ?>
+                        
                         </tbody>
                     </table>
                     <div id="modalEdt" class="hidden fixed top-0 left-0 w-full h-full flex justify-center items-center bg-opacity-50 bg-black">
