@@ -147,9 +147,10 @@ if ($_SESSION['user']['rol_id'] != 1) {
 
                             $query  = "SELECT `id_user`,`dni`,`nombre`,`apellido`, `email`,`direccion`,`fecha_nacimiento` FROM usuarios LEFT Join login_user on id_user = id_users WHERE rol_id = 3;";
                             $result = $mysqli->query($query);
-                            
+
+                            $style = 'bg-gray-200';
                             while ($row = $result->fetch_assoc()) {
-                                echo "<tr class='bg-white'>";
+                                echo "<tr class='$style '>";
                                 echo "<td class='py-2 px-4 border-r'>" . $row['id_user'] . "</td>";
                                 echo "<td class='py-2 px-4 border-r'>" . $row['dni'] . "</td>";
                                 echo "<td class='py-2 px-4 border-r'>" . $row['nombre'] . "</td>";
@@ -162,6 +163,7 @@ if ($_SESSION['user']['rol_id'] != 1) {
                                 echo " <form action='./delete_alumno.php' method='post' class='flex items-center justify-center'>  <input type='hidden' class='editId'' name='editId'> <button class='deleteBtn text-red-500 hover:underline ml-2' ><img src='../../assets/delete.svg' alt='delete'></button> </form> ";
                                 echo "</td>";
                                 echo "</tr>";
+                                $style = ($style == 'bg-white') ? 'bg-gray-200' : 'bg-white';
                             }
                             
                             $result->free();
@@ -202,7 +204,7 @@ if ($_SESSION['user']['rol_id'] != 1) {
                                 </div>
                                 <div class="flex justify-end gap-2 mt-6">
                                     <button type="button" class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500" id="cerrarModalEdit">Cerrar</button>
-                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" id="updateBtn">Actualizar</button>
+                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" id="updateBtn">Guardar cambios</button>
                                 </div>
                             </form>
                         </div>

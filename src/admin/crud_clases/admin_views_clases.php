@@ -97,7 +97,7 @@ if ($resultUser->num_rows > 0) {
                         </div>
                     </div>
                 </div>
-                <div class="max-w-4xl mx-auto p-8 bg-white rounded shadow-lg mt-8">
+                <div class="max-w-full mx-auto p-8 bg-white rounded shadow-lg mt-8">
                     <div class="flex justify-between mb-4">
                         <h3 class="text-2xl font-semibold">Información de Clases</h3>
                         <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer" id="modalToggle">
@@ -125,47 +125,53 @@ if ($resultUser->num_rows > 0) {
                                 </div>
                                 <div class="flex justify-end gap-2 mt-6">
                                     <button type="button" class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500" id="closeModal">Cerrar</button>
-                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" id="createBtn">Crear</button>
+                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" id="createBtn">Agregar</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <table class="w-full border-collapse border">
                         <thead>
-                            <tr class="bg-gray-100">
+                            <tr class="bg-gray-200">
                                 <th class="py-2 px-4 border-r">#</th>
                                 <th class="py-2 px-4 border-r">Materia</th>
                                 <th class="py-2 px-4 border-r">Maestro</th>
+                                <th class="py-2 px-4 border-r">Alumnos inscritos</th>
                                 <th class="py-2 px-4 border-r">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
 
-                            $query  = "SELECT m.id_materia, m.materia, u.nombre
+                            $query  = "SELECT m.id_materia, m.materia, u.nombre, COUNT(am.id_alumate) AS cantidad_alumnos
                             FROM materias AS m
                             INNER JOIN profesor_materias AS pm ON m.id_materia = pm.id_profemate
                             INNER JOIN usuarios AS u ON pm.id_profesor = u.id_user
-                            WHERE u.rol_id = 2;";
+                            LEFT JOIN alumnos_materias AS am ON m.id_materia = am.id_alumate
+                            WHERE u.rol_id = 2
+                            GROUP BY m.id_materia, m.materia, u.nombre;";
                             $result = $mysqli->query($query);
 
+                            $style = 'bg-gray-200';
+
                             while ($row = $result->fetch_assoc()) {
-                                echo "<tr class='bg-white'>";
+                                echo "<tr class='$style '>";
                                 echo "<td class='py-2 px-4 border-r'>" . $row['id_materia'] . "</td>";
                                 echo "<td class='py-2 px-4 border-r'>" . $row['materia'] . "</td>";
                                 echo "<td class='py-2 px-4 border-r'>" . $row['nombre'] . "</td>";
-
-                                echo "<td class='py-2 px-4 border-r flex flex-row'>";
-                                echo "<button class='text-blue-500 hover:underline' id='modalUpdateToggle'
-                                        onclick='openUpdateModal(this)'>Editar</button>";
-                                echo "<button class='text-red-500 hover:underline ml-2'>Eliminar</button>";
+                                echo "<td class='py-2 px-4 border-r'>" . $row['cantidad_alumnos'] . " </td>"; 
+                                echo "<td class='py-2 px-4 border-r flex items-center justify-center gap-3'>";
+                                echo "<button class='text-blue-500 hover:underline flex items-center justify-center' id='modalUpdateToggle' onclick='openUpdateModal(this)'><img src='../../assets/edit.svg' alt='edit'></button>";
+                                echo " <form action='./delete_clases.php' method='post' class='flex items-center justify-center'>  <input type='hidden' class='editId'' name='editId'> <button class='deleteBtn text-red-500 hover:underline ml-2' ><img src='../../assets/delete.svg' alt='delete'></button> </form> ";
                                 echo "</td>";
                                 echo " </tr>";
+                                $style = ($style == 'bg-white') ? 'bg-gray-200' : 'bg-white';
                             }
                             $result->free();
                             ?>
                         </tbody>
                     </table>
+                    <form action=""></form>
                     <div id="updateModal" class="hidden fixed top-0 left-0 w-full h-full flex justify-center items-center bg-opacity-50 bg-black">
                         <div class="bg-white p-8 rounded shadow-lg w-1/2">
                             <h2 class="text-2xl font-semibold mb-4">Actualizar Clase</h2>
@@ -188,7 +194,7 @@ if ($resultUser->num_rows > 0) {
                                 </div>
                                 <div class="flex justify-end gap-2 mt-6">
                                     <button type="button" class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500" id="closeUpdateModal">Cerrar</button>
-                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" id="updateBtn">Actualizar</button>
+                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" id="updateBtn">Guardar cambios</button>
                                 </div>
                             </form>
                         </div>
