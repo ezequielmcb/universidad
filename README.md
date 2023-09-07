@@ -1,6 +1,24 @@
 # universidad
 pagina para una universidad
 
+usuarios:
+correo:
+admin@admin
+contraseña:
+admin
+
+correo:
+maestro@mmaestro
+contraseña:
+maestro
+
+correo:
+alumno@alumno
+contraseña:
+alumno
+
+
+
 CADA USUARIO PUEDE EDITAR SU PERFIL.
 Tiene modals el programa
 Si ingresas con un usuario no reguistrado aparecera un mensaje de error.
