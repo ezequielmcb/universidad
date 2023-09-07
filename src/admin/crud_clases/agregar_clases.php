@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         var_dump($id_generado);
 
-
         header('location: ./admin_views_clases.php');
 
         exit();

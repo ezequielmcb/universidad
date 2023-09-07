@@ -23,6 +23,7 @@ $result = $mysqli->query($query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/dist//output.css">
     <script src="../accions/modal_salir.js" defer></script>
+    <title>Alumno</title>
 </head>
 
 <body>
@@ -42,7 +43,6 @@ $result = $mysqli->query($query);
                             <li class=" "> Administra tus Clases </li>
                         </ul>
                     </div>
-                    </button>
                 </div>
             </div>
         </div>
@@ -60,8 +60,10 @@ $result = $mysqli->query($query);
                         <div id="toggleMenu" class=" absolute top-full min-w-full w-max bg-white mt-1 rounded hidden">
 
                             <ul class="text-left border none">
-                                <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../assets/person.svg" alt="">
-                                    Perfil </li>
+                                <a href="./perfil_alumno.php">
+                                    <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../assets/person.svg" alt="">
+                                        Perfil </li>
+                                </a>
                                 <a href="../accions/logout.php">
                                     <li class="px-4 py-1 border-b flex flex-row gap-3"><img src="../assets/cerrar.svg" alt="">
                                         Salir
@@ -88,8 +90,8 @@ $result = $mysqli->query($query);
                         <h2 class="text-lg font-bold mb-2">Tus Materias Inscritas</h2>
                         <div class="shadow-md rounded-lg overflow-hidden">
                             <table class="w-full table-auto">
-                                <thead class="bg-gray-100">
-                                    <tr>
+                                <thead>
+                                    <tr class="bg-gray-200">
                                         <th class="py-2 px-3 text-center">#</th>
                                         <th class="py-2 px-3 text-center">Materia</th>
                                         <th class="py-2 px-3 text-center">Darse de Baja</th>
@@ -97,14 +99,17 @@ $result = $mysqli->query($query);
                                 </thead>
                                 <tbody>
                                     <?php
+                                    $style = 'bg-white';
+
                                     while ($row = $result->fetch_assoc()) {
-                                        echo "<tr class='bg-white'>";
+                                        echo "<tr class='$style '>";
                                         echo "<td class='py-2 px-4 border-r'>" . $row['id_materia'] . "</td>";
                                         echo "<td class='py-2 px-4 border-r'>" . $row['materia'] . "</td>";
                                         echo "<td class='py-2 px-4 border-r'>";
                                         echo "<button class='text-blue-500 hover:underline' onclick='openUpdateModal(this)'>Retirar</button>";
                                         echo "</td>";
                                         echo "</tr>";
+                                        $style = ($style == 'bg-white') ? 'bg-gray-200' : 'bg-white';
                                     }
                                     $result->free();
                                     ?>
@@ -112,16 +117,16 @@ $result = $mysqli->query($query);
                             </table>
                         </div>
                     </div>
-                    <form action="" method="post" class="w-1/4 pl-4">
+                    <form action="./alegir_materia.php" method="post" class="w-1/4 pl-4">
                         <h2 class="text-lg font-bold mb-2">Materias para inscribir</h2>
                         <div class="shadow-md rounded-lg p-4 ">
-                            <label class="block font-semibold mb-2">Selecciona las materias disponibles:</label>
-                            <select multiple class="w-full border rounded-lg p-2 mb-4">
+                            <label for="materia" class="block font-semibold mb-2">Selecciona las materias disponibles:</label>
+                            <select id="materia" name="materia[]" multiple class="w-full border rounded-lg p-2 mb-4">
                                 <?php
                                 include("../accions/connection.php");
 
                                 $materiaquery = "SELECT * FROM materias";
-                                
+
                                 $resultmateria = $mysqli->query($materiaquery);
                                 if ($resultmateria->num_rows > 0) {
                                     while ($row = $resultmateria->fetch_assoc()) {
@@ -141,4 +146,5 @@ $result = $mysqli->query($query);
         </div>
     </div>
 </body>
+
 </html>

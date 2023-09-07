@@ -25,9 +25,10 @@ $resulrol = $mysqli->query($rolquery);
     <link rel="stylesheet" href="/dist//output.css">
     <script src="../../accions/modalPermisos.js" defer></script>
     <script src="../../accions/modal_salir.js" defer></script>
+    <title>Administracion</title>
 </head>
 
-<body>
+<body> 
     <div class="w-screen h-screen flex">
         <div class="flex h-full bg-blue-900 text-white w-60  py-6 flex-col justify-between">
             <div class="px-6">
@@ -70,8 +71,11 @@ $resulrol = $mysqli->query($rolquery);
                         <div id="toggleMenu" class=" absolute top-full min-w-full w-max bg-white mt-1 rounded hidden">
 
                             <ul class="text-left border none">
-                                <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../../assets/person.svg" alt="">
-                                    Perfil </li>
+                            <a href="../perfil_admin.php">
+                                    <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../../assets/person.svg" alt="">
+                                        Perfil
+                                    </li>
+                                </a>
                                 <a href="../../accions/logout.php">
                                     <li class="px-4 py-1 border-b flex flex-row gap-3"><img src="../../assets/cerrar.svg" alt="">
                                         Salir
@@ -93,7 +97,7 @@ $resulrol = $mysqli->query($rolquery);
                         </div>
                     </div>
                 </div>
-                <div class="hidden fixed inset-0  justify-center items-center z-50" id="modal">
+                <div class="hidden fixed inset-0 flex justify-center items-center z-50" id="modal">
                     <div class="bg-white p-8 rounded-lg shadow-md w-96">
                         <h2 class="text-2xl font-semibold mb-4">Editar Permisos</h2>
                         <form action="./editar_permisos.php" method="post" class="text" id="permisosForm">
@@ -126,7 +130,7 @@ $resulrol = $mysqli->query($rolquery);
                     <h2 class="text-2xl font-semibold mb-4">Informacion de Permisos</h2>
                     <table class="w-full border">
                         <thead>
-                            <tr class="bg-gray-300">
+                            <tr class="bg-gray-200">
                                 <th class="py-2 px-4">Email/Usuario</th>
                                 <th class="py-2 px-4">Permiso</th>
                                 <th class="py-2 px-4">Acciones</th>
@@ -135,9 +139,11 @@ $resulrol = $mysqli->query($rolquery);
                         <tbody id="infoUser">
 
                             <?php
+                            $style = 'bg-white';
+
                             if ($resulta->num_rows > 0) {
                                 while ($row = $resulta->fetch_assoc()) {
-                                    echo '<tr class="bg-white">';
+                                    echo "<tr class='$style '>";
                                     echo "<td class='py-2 px-4 border-r'>" . $row['email'] . "</td>";
                                     echo '<td class="py-2 px-4 border-r">';
                                     if ($row['rol_id'] == 1) {
@@ -152,12 +158,13 @@ $resulrol = $mysqli->query($rolquery);
                                     echo '</td>';
 
                                     echo '<td class="py-2 px-4 border-r flex flex-row">';
-                                    echo '<button class="bg-blue-500 text-white px-2 py-1 rounded editar" onclick="editar(this)" >Editar</button>';
+                                    echo '<button class="flex items-center justify-center w-full px-2 py-1 rounded editar" onclick="editar(this)" ><img src="../../assets/edit.svg" alt=""</button>';
                                     echo '</td>';
                                     echo '</tr>';
+                                    $style = ($style == 'bg-white') ? 'bg-gray-200' : 'bg-white';
                                 }
                             } else {
-                                echo '<tr class="bg-white">';
+                                echo "<tr class='$style '>";
                                 echo '<td class="py-2 px-4 border-r" colspan="7">No se encontraron usuarios</td>';
                                 echo '</tr>';
                             }

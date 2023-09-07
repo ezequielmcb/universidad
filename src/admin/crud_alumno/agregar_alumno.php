@@ -14,8 +14,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $resultado = $mysqli->query($query);
 
         $dato_id = $mysqli->insert_id;
+        session_start();
+        $user = $_SESSION["user"];
+        $rol_id = $user["rol_id"]; 
+        if($rol_id ==  1){
+            $rol = "admins";
+         }
+         
+         if($rol_id ==  2){
+            $rol = "maestro";
+         }
+         
+         if($rol_id ==  3){
+            $rol = "alumno";
+         }
 
-        $querycontra = "INSERT INTO login_user (`id_users`, `email`, `pass`) VALUES ('$dato_id', '$correo', '123')";
+         $passHashRol = password_hash($rol, PASSWORD_DEFAULT);
+
+        $querycontra = "INSERT INTO login_user (`id_users`, `email`, `pass`) VALUES ('$dato_id', '$correo', '$passHashRol')";
         $mysqli->query($querycontra);
 
         header('location: ./admin_views_alum.php');

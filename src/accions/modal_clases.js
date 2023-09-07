@@ -1,4 +1,4 @@
-const modal = document.querySelector('#modal');
+const modal = document.querySelector('#modalAdd');
 const modalToggle = document.querySelector('#modalToggle');
 const closeModal = document.querySelector('#closeModal');
 
@@ -10,25 +10,28 @@ closeModal.addEventListener('click', function () {
     modal.classList.add('hidden');
 });
 
-const modal2 = document.querySelector('#modal');
-const modalToggle2 = document.querySelector('#modalToggle');
-const closeModal2 = document.querySelector('#closeModal');
-const updateModal = document.querySelector('#updateModal');
-const updateModalToggle = document.querySelector('#modalUpdateToggle');
+document.addEventListener("DOMContentLoaded", function () {
+    const openModal = document.querySelectorAll(".updateModal");
+
+    openModal.forEach(function (button) {
+        button.addEventListener("click", function () {
+            updateModal.classList.remove('hidden');
+        });
+    });
+});
+
 const closeUpdateModal = document.querySelector('#closeUpdateModal');
-
-modalToggle.addEventListener('click', function () {
-    modal.classList.remove('hidden');
-});
-
-closeModal.addEventListener('click', function () {
-    modal.classList.add('hidden');
-});
-
-updateModalToggle.addEventListener('click', function () {
-    updateModal.classList.remove('hidden');
-});
-
 closeUpdateModal.addEventListener('click', function () {
     updateModal.classList.add('hidden');
 });
+
+
+
+
+
+// const updateModal = document.querySelector('#updateModal');
+// const updateModalToggle = document.querySelector('#modalUpdateToggle');
+
+// updateModalToggle.addEventListener('click', function () {
+// });
+

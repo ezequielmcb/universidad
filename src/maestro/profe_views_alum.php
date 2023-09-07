@@ -19,6 +19,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 2) {
     <link rel="stylesheet" href="/dist//output.css">
     <script src="../accions/modal_calificacion.js" defer></script>
     <script src="../accions/modal_salir.js" defer></script>
+    <title>Maestro</title>
 </head>
 
 <body>
@@ -33,7 +34,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 2) {
                 <div class="border-t border-white pt-4 text-sm ">Menu Maestro</div>
                 <div class="mt-6 space-y-2">
                     <button class="flex flex-row justify-center group">
-                        <a href="#">
+                        <a href="#" class="flex items-center justify-center">
                             <img src="../assets/alumno.svg" alt="" height="32px" width="32px">
                             <p class="px-4">Alumnos</p>
                         </a>
@@ -54,13 +55,15 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 2) {
                     </a>
                 </div>
                 <div class=" flex flex-row justify-between items-center">
-                <button id="buttonToggle" class="relative flex justify-center items-center group">
+                    <button id="buttonToggle" class="relative flex justify-center items-center group">
                         <p class="px-4"> Maestro </p>
                         <div id="toggleMenu" class=" absolute top-full min-w-full w-max bg-white mt-1 rounded hidden">
 
                             <ul class="text-left border none">
+                                <a href="./perfil_profesor.php">
                                 <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../assets/person.svg" alt="">
                                     Perfil </li>
+                                    </a>
                                 <a href="../accions/logout.php">
                                     <li class="px-4 py-1 border-b flex flex-row gap-3"><img src="../assets/cerrar.svg" alt="">
                                         Salir
@@ -129,22 +132,25 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 2) {
 
                                 $result = $mysqli->query($query);
 
+                                $style = 'bg-white';
                                 while ($row = $result->fetch_assoc()) {
-                                    echo "<tr class='bg-white'>";
+                                    echo "<tr class='$style '>";
                                     echo "<td class='py-2 px-4 border-r'>" . $row['id_am'] . "</td>";
                                     echo "<td class='py-2 px-4 border-r'>" . $row['nombre'] . "</td>";
                                     echo "<td class='py-2 px-4 border-r'>" . $row['calificacion'] . "</td>";
                                     echo "<td class='py-2 px-4 border-r'>" . $row['mensajes'] . "</td>";
                                     echo "<td class='py-2 px-4 border-r'>";
-                                    echo '<button class="text-blue-500 hover:underline" onclick="abrirModal(this)" id_usuario="' . $row['id_am'] . '" > Editar</button>';
+                                    echo '<button class="text-blue-500 hover:underline w-full flex items-center justify-center mb-4" onclick="abrirModal(this)" id_usuario="' . $row['id_am'] . '" > <img src="../assets/edit.svg" alt="edit"></button>';
                                     echo "</td>";
                                     echo "</tr>";
+                                    $style = ($style == 'bg-white') ? 'bg-gray-200' : 'bg-white';
                                 }
 
                                 $result->free();
                                 ?>
                             </tbody>
                         </table>
+
                         <div class="mt-4 flex justify-center">
                         </div>
                     </div>

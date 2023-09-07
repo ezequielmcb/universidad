@@ -48,13 +48,15 @@ include("../accions/connection.php");
                     </a>
                 </div>
                 <div class=" flex flex-row justify-between items-center">
-                <button id="buttonToggle" class="relative flex justify-center items-center group">
+                    <button id="buttonToggle" class="relative flex justify-center items-center group">
                         <p class="px-4"> Alumno </p>
                         <div id="toggleMenu" class=" absolute top-full min-w-full w-max bg-white mt-1 rounded hidden">
 
                             <ul class="text-left border none">
-                                <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../assets/person.svg" alt="">
-                                    Perfil </li>
+                                <a href="./perfil_alumno.php">
+                                    <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../assets/person.svg" alt="">
+                                        Perfil </li>
+                                </a>
                                 <a href="../accions/logout.php">
                                     <li class="px-4 py-1 border-b flex flex-row gap-3"><img src="../assets/cerrar.svg" alt="">
                                         Salir
@@ -81,8 +83,8 @@ include("../accions/connection.php");
                         <h2 class="text-lg font-bold mb-2">Tus Materias Inscritas</h2>
                         <div class="shadow-md rounded-lg overflow-hidden">
                             <table class="w-full table-auto">
-                                <thead class="bg-gray-100">
-                                    <tr>
+                                <thead>
+                                    <tr class="bg-gray-200">
                                         <th class="py-2 px-3 text-center">#</th>
                                         <th class="py-2 px-3 text-center">Materia</th>
                                         <th class="py-2 px-3 text-center">Calificacion</th>
@@ -101,15 +103,16 @@ include("../accions/connection.php");
                                     WHERE u.rol_id = 3";
 
                                     $result = $mysqli->query($query);
-
+                                    $style = 'bg-white';
                                     while ($row = $result->fetch_assoc()) {
-                                        echo "<tr class='bg-white'>";
+                                        echo "<tr class='$style '>";
                                         echo "<td class='py-2 px-4 border-r'>" . $row['id_materia'] . "</td>";
                                         echo "<td class='py-2 px-4 border-r'>" . $row['materia'] . "</td>";
                                         echo "<td class='py-2 px-4 border-r'>" . $row['calificacion'] . "</td>";
                                         echo "<td class='py-2 px-4 border-r'>" . $row['mensajes'] . "</td>";
                                         echo "</td>";
                                         echo "</tr>";
+                                        $style = ($style == 'bg-white') ? 'bg-gray-200' : 'bg-white';
                                     }
 
                                     $result->free();

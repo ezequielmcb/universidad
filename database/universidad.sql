@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 05-09-2023 a las 23:42:56
+-- Tiempo de generación: 07-09-2023 a las 16:44:28
 -- Versión del servidor: 8.0.31
 -- Versión de PHP: 8.2.0
 
@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS `alumnos_materias` (
 --
 
 INSERT INTO `alumnos_materias` (`id_am`, `id_alumno`, `id_alumate`, `calificacion`, `mensajes`) VALUES
-(1, 2, 3, 90, 'has mejorado mucho'),
-(2, 3, 43, 12, 'pesimoo');
+(1, 2, 15, 90, 'has mejorado mucho'),
+(2, 3, 15, 12, 'pesimoo');
 
 -- --------------------------------------------------------
 
@@ -62,32 +62,19 @@ CREATE TABLE IF NOT EXISTS `login_user` (
   PRIMARY KEY (`id_login`),
   UNIQUE KEY `email` (`email`),
   KEY `login_user_FK` (`id_users`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `login_user`
 --
 
 INSERT INTO `login_user` (`id_login`, `email`, `pass`, `id_users`) VALUES
-(1, 'admin@admin', '123', 1),
-(2, 'maestro@maestro123', '222', 2),
-(3, 'alumn@alumno', '333', 3),
-(4, 'wityjafys@mailinator.com', 'tu_contrasena', 16),
-(5, 'qozymorile@mailinator.com', 'tu_contrasena', 17),
-(6, 'maestro@maestro', '123', 18),
-(7, 'wunezuhum@mailinator.com', '123', 19),
-(8, 'hesazi@mailinator.com', '123', 20),
-(9, 'wivumamipa@mailinator.com', '123', 21),
-(10, 'qopegapowa@mailinator.com', '123', 22),
-(11, 'xowiro@mailinator.com', '123', 23),
-(12, 'fovu@mailinator.com', '123', 24),
-(13, 'ezequielcespede@gmail.com', NULL, 25),
-(14, 'ezequielcessdaspede@gmail.com', NULL, 27),
-(15, 'esssssszequielcespede@gmail.com', NULL, 26),
-(16, 'qwe@qweasdasd', NULL, 30),
-(17, 'zxc@zxc.com', NULL, 28),
-(18, 'qwe@qwewdasd', NULL, 29),
-(19, 'qwe@qwe', NULL, 31);
+(1, 'admin@admin', '$2y$10$3yBkuJiw6wPaaSNerx02quoIMEfR5J1TZSFeAjwMWOh1ayn1Gzyhi', 1),
+(3, 'alumno@alumno', '$2y$10$QBuXH6e.VcYxhdRhzoCgPetuksBQDK7e11uVb8ZxXDYXMWBmQla0O', 3),
+(31, 'alumno@2', '$2y$10$aGkFoGPccgbShcnMq3LVxu7WvDX3ra5LJJT9.RIJya3I9.k30unai', 53),
+(32, 'maestro@maestro', '$2y$10$6Y.Y0pMbuAZQDMNWubWIQuUhPry2BHFe50w4Z0cUdcKf.X8rN.1Ua', 58),
+(33, 'Ezequiel@eze', '$2y$10$2pKNr8dsbU6fgeRWF/Q6Suxgrz546QoAUYcUzXxccmwWD7Z/qfZFi', 61),
+(35, 'maestro@3', '$2y$10$4s32GdzD6gHqfSY9wE4jQuYcOrJTBr7HkXov.Xyy0Gxwk26jINUAK', 63);
 
 -- --------------------------------------------------------
 
@@ -100,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `materias` (
   `id_materia` int NOT NULL AUTO_INCREMENT,
   `materia` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_materia`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `materias`
@@ -108,50 +95,34 @@ CREATE TABLE IF NOT EXISTS `materias` (
 
 INSERT INTO `materias` (`id_materia`, `materia`) VALUES
 (1, 'matematica'),
-(2, 'ciencias sociales'),
-(3, 'lengua española'),
-(4, ''),
-(5, ''),
-(6, ''),
-(7, ''),
-(8, ''),
-(9, ''),
-(10, ''),
 (11, 'fisica'),
-(12, 'fisica'),
-(13, ''),
-(14, ''),
-(15, ''),
-(16, ''),
-(17, ''),
-(18, ''),
-(19, ''),
-(20, ''),
-(21, 'fisica'),
+(12, 'Comunicacion'),
+(14, 'Ingeniería Mecánica'),
+(15, 'Economía'),
+(16, 'Ingeniería Civil '),
 (22, 'fisica'),
-(23, ''),
-(24, ''),
-(25, 'religion'),
-(26, ''),
-(27, ''),
-(28, 'gastronomia'),
-(29, 'gastronomia'),
+(23, 'Lingüística'),
+(24, 'Literatura '),
+(27, 'Sociología '),
 (30, 'gastronomia'),
-(31, 'gastronomia'),
-(32, 'gastronomia'),
-(33, 'gastronomia'),
-(34, ''),
-(35, ''),
-(36, ''),
-(37, 'gastronomia'),
-(38, 'programacionn inicial'),
-(39, 'programacionn inicial'),
-(40, 'teatro'),
-(41, 'teatro'),
-(42, 'fisica'),
+(31, 'Literatura'),
+(36, 'Farmacia '),
 (43, 'programacionn inicial'),
-(44, 'sociales'),
-(45, 'matema');
+(50, 'fisica'),
+(51, 'programacionn inicial'),
+(52, 'programacion'),
+(60, 'Iusto doloremque ips'),
+(64, 'Religion'),
+(68, 'fisica'),
+(71, 'sociales'),
+(72, 'fisica'),
+(73, 'programacion'),
+(74, 'matema'),
+(76, 'Matemetica'),
+(77, 'Ingles'),
+(78, 'Teatro'),
+(80, 'fisica'),
+(82, 'Matematica');
 
 -- --------------------------------------------------------
 
@@ -165,32 +136,20 @@ CREATE TABLE IF NOT EXISTS `profesor_materias` (
   `id_profesor` int DEFAULT NULL,
   `id_profemate` int DEFAULT NULL,
   PRIMARY KEY (`id_pm`),
-  KEY `profesor_materias_FK` (`id_profesor`),
-  KEY `profesor_materias_FK_1` (`id_profemate`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `profesor_materias_FK_1` (`id_profemate`),
+  KEY `profesor_materias_FK_2` (`id_profesor`)
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `profesor_materias`
 --
 
 INSERT INTO `profesor_materias` (`id_pm`, `id_profesor`, `id_profemate`) VALUES
-(1, 2, 2),
+(1, 2, 36),
 (2, 2, 1),
-(3, 28, 3),
-(4, 29, 3),
-(5, 32, 3),
-(6, 33, 2),
-(7, 35, 44),
-(8, 36, 3),
-(9, 37, 2),
-(10, 39, 3),
-(11, 40, 2),
-(12, 31, 39),
-(13, 39, 40),
-(14, 39, 41),
-(15, 36, 42),
-(16, 39, 43),
-(17, 24, 44);
+(49, 58, 15),
+(51, 58, 82),
+(53, 63, 27);
 
 -- --------------------------------------------------------
 
@@ -231,54 +190,22 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `rol_id` int DEFAULT NULL,
   PRIMARY KEY (`id_user`),
   KEY `usuarios_FK` (`rol_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`id_user`, `dni`, `nombre`, `apellido`, `fecha_nacimiento`, `direccion`, `rol_id`) VALUES
-(1, 40290188, 'Ezequiel', 'Cespedes', '2013-09-03', 'calle 34 carrera 09-2', 1),
+(1, 402180238, 'Ezequiel', 'Cespedes Baez', '2001-01-24', 'calle 34 carrera 09-2', 1),
 (2, 5234341, 'manuel', 'casado', '0000-00-00', 'CALLE 30 DE MARZO #00', 3),
-(3, 98765, 'Dolorem molestiae mo', 'Temporibus unde aut ', '1977-05-22', 'Asperiores id dolor ', 3),
-(4, 987654, '22-Jan-1989', '14-Oct-1993', '2010-11-27', '28-Oct-2021', 3),
-(5, 987654, '02-Mar-1996', '27-Oct-1976', '2015-02-01', '19-Aug-2019', 3),
-(6, 987654, '11-Mar-2014', '20-Mar-2011', '1983-12-05', '04-Jan-1997', 3),
-(7, 2312454, 'matias', 'perez', '2012-12-12', 'esquia 4 calle 3', 3),
-(8, 1321234, '16-Jun-2012', '18-Feb-2021', '1996-02-04', '05-Apr-1988', 3),
-(9, 0, '25-Aug-1995', '09-Aug-1991', '2004-05-10', '22-Nov-2003', 3),
-(10, 0, 'Blanditiis cillum qu', 'Omnis aut molestiae ', '1987-07-04', 'Quas minima sed qui ', 3),
-(11, 0, 'Blanditiis cillum qu', 'Omnis aut molestiae ', '1987-07-04', 'Quas minima sed qui ', 3),
-(12, 0, 'Blanditiis cillum qu', 'Omnis aut molestiae ', '1987-07-04', 'Quas minima sed qui ', 3),
-(13, 0, 'Blanditiis cillum qu', 'Omnis aut molestiae ', '1987-07-04', 'Quas minima sed qui ', 3),
-(14, 0, 'Blanditiis cillum qu', 'Omnis aut molestiae ', '1987-07-04', 'Quas minima sed qui ', 3),
-(15, 0, 'Blanditiis cillum qu', 'Omnis aut molestiae ', '1987-07-04', 'Quas minima sed qui ', 3),
-(16, 0, 'Quis debitis rerum c', 'Sunt natus tempore ', '1973-01-26', 'Nam esse qui et nih', 3),
-(17, 67897689, 'Recusandae Non nesc', 'Eius aliquam volupta', '2020-03-08', 'Vitae consectetur pr', 3),
-(18, 0, '', '', '0000-00-00', '', 2),
-(19, 0, 'Enim maxime Nam veli', 'Vitae praesentium eo', '1996-06-06', 'Officia autem possim', 3),
-(20, 0, 'Dolore ut qui dolore', 'Harum voluptate est', '1981-12-16', 'Ullamco consectetur', 3),
-(21, 0, 'Pariatur Qui aperia', 'Eu perferendis ducim', '2013-12-05', 'Quo harum aute sunt ', 3),
-(22, 0, 'Id porro voluptatem', 'Duis ut sit aperiam ', '1981-03-05', 'Quia ullamco quos ut', 3),
-(23, 0, 'Beatae sint temporib', 'Dolore aliquid irure', '0001-01-01', 'Quis autem ex tempor', 3),
-(24, 0, 'ppppppppp', 'Sequi quas non fugia', '1995-11-17', 'Quam voluptatibus au', 3),
-(25, NULL, 'Ezequiel', 'Cespedes', '0000-00-00', 'No.85 Calle 30 De Marzo', 3),
-(26, NULL, 'Ezequiel', 'Cespedes', '0000-00-00', 'No.85 Calle 30 De Marzo', 2),
-(27, NULL, 'Ezequiel', 'Cespedes', '0000-00-00', 'No.85 Calle 30 De Marzo', 3),
-(28, NULL, 'zcx', 'zxc', '0000-00-00', 'cam', 2),
-(29, NULL, 'ma', 'ma', '0000-00-00', 'Sit libero vitae ei', 2),
-(30, NULL, 'qwe', 'qwee', '0000-00-00', 'qqw', 3),
-(31, NULL, 'Ezequiel', 'Cespedes', '0000-00-00', 'No.85 Calle 30 De Marzo', 3),
-(32, NULL, 'Ezequiel', 'Cespedes', '0000-00-00', 'No.85 Calle 30 De Marzo', 2),
-(33, NULL, 'Consequatur tempor i', 'Iusto proident repe', '1999-12-28', 'Officia adipisicing ', 2),
-(34, NULL, 'Ipsum quidem nihil ', 'Ex odio architecto e', '2004-07-08', 'Sunt facilis esse ', 2),
-(35, NULL, 'Ezequiel', 'Cespedes', '2023-09-14', 'No.85 Calle 30 De Marzo', 2),
-(36, NULL, 'Perspiciatis dolor ', 'Consequuntur consequ', '1972-09-09', 'Sint voluptas offici', 2),
-(37, NULL, 'zzz', 'xxxx', '2023-08-31', 'No.85 Calle 30 De Marzo', 2),
-(38, NULL, 'Ad eveniet quia mol', 'Esse ad nulla asper', '0000-00-00', 'Eos impedit consect', 2),
-(39, NULL, 'leo', 'quezadda', '1978-02-11', 'Expedita ex sit vol', 2),
-(40, NULL, 'Ezequiel', 'Cespedes', '2023-09-23', 'No.85 Calle 30 De Marzo', 2),
-(41, NULL, '', '', '0000-00-00', '', 2);
+(3, 98765, 'Alberto', 'Mendez', '1995-05-10', 'calle 30 #10-19', 3),
+(53, 2147483647, 'Michelle ', 'Churchill ', '2017-06-10', 'Calle #90 carrera 45b', 3),
+(58, 2147483647, 'Angelica', 'Cespedes', '1999-10-16', 'Carretera las yayas', 2),
+(59, 98765789, 'Ezequiel', 'Cespedes', '2001-01-24', 'calle 30 #10-19', 3),
+(60, 98765789, 'Ezequiel', 'Cespedes', '2001-01-24', 'calle 30 #10-19', 3),
+(61, 98765789, 'Ezequiel', 'Cespedes', '2001-01-24', 'calle 30 #10-19', 3),
+(63, 2147483647, 'Alberto', 'Perez', '2000-08-06', 'Colombia, popayan ', 2);
 
 --
 -- Restricciones para tablas volcadas
@@ -301,8 +228,8 @@ ALTER TABLE `login_user`
 -- Filtros para la tabla `profesor_materias`
 --
 ALTER TABLE `profesor_materias`
-  ADD CONSTRAINT `profesor_materias_FK` FOREIGN KEY (`id_profesor`) REFERENCES `usuarios` (`id_user`),
-  ADD CONSTRAINT `profesor_materias_FK_1` FOREIGN KEY (`id_profemate`) REFERENCES `materias` (`id_materia`);
+  ADD CONSTRAINT `profesor_materias_FK_1` FOREIGN KEY (`id_profemate`) REFERENCES `materias` (`id_materia`),
+  ADD CONSTRAINT `profesor_materias_FK_2` FOREIGN KEY (`id_profesor`) REFERENCES `usuarios` (`id_user`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `usuarios`

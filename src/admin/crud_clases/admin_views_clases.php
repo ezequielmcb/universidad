@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 1) {
@@ -29,6 +30,7 @@ if ($resultUser->num_rows > 0) {
     <link rel="stylesheet" href="/dist//output.css">
     <script src="../../accions/modal_clases.js" defer></script>
     <script src="../../accions/modal_salir.js" defer></script>
+    <title>Administracion</title>
 </head>
 <body>
     <div class="w-screen h-screen flex">
@@ -74,8 +76,11 @@ if ($resultUser->num_rows > 0) {
                         <div id="toggleMenu" class=" absolute top-full min-w-full w-max bg-white mt-1 rounded hidden">
 
                             <ul class="text-left border none">
-                                <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../../assets/person.svg" alt="">
-                                    Perfil </li>
+                            <a href="../perfil_admin.php">
+                                    <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../../assets/person.svg" alt="">
+                                        Perfil
+                                    </li>
+                                </a>
                                 <a href="../../accions/logout.php">
                                     <li class="px-4 py-1 border-b flex flex-row gap-3"><img src="../../assets/cerrar.svg" alt="">
                                         Salir
@@ -104,7 +109,7 @@ if ($resultUser->num_rows > 0) {
                             Agregar Clase
                         </button>
                     </div>
-                    <div id="modal" class="hidden fixed top-0 left-0 w-full h-full flex justify-center items-center bg-opacity-50 bg-black">
+                    <div id="modalAdd" class="hidden fixed top-0 left-0 w-full h-full flex justify-center items-center bg-opacity-50 bg-black">
                         <div class="bg-white p-8 rounded shadow-lg w-1/2">
                             <h2 class="text-2xl font-semibold mb-4">Agregar Clase</h2>
                             <form action="./agregar_clases.php" method="POST">
@@ -113,8 +118,7 @@ if ($resultUser->num_rows > 0) {
                                     <input type="text" id="materia" name="materia" class="w-full border px-3 py-2 rounded focus:outline-none focus:ring focus:border-blue-300">
                                 </div>
                                 <div class="mb-2">
-                                    <label for="profesor" class="block font-medium">Maestro Disponible para la
-                                        clase</label>
+                                    <label for="profesor" class="block font-medium">Maestro Disponible para la clase</label>
                                     <select id="profesor" name="profesor" class="w-full border px-3 py-2 rounded focus:outline-none focus:ring focus:border-blue-300">
                                         <?php
                                         foreach ($usuarios as $usuario) {
@@ -125,7 +129,7 @@ if ($resultUser->num_rows > 0) {
                                 </div>
                                 <div class="flex justify-end gap-2 mt-6">
                                     <button type="button" class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500" id="closeModal">Cerrar</button>
-                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" id="createBtn">Agregar</button>
+                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" >Agregar</button>
                                 </div>
                             </form>
                         </div>
@@ -152,7 +156,7 @@ if ($resultUser->num_rows > 0) {
                             GROUP BY m.id_materia, m.materia, u.nombre;";
                             $result = $mysqli->query($query);
 
-                            $style = 'bg-gray-200';
+                            $style = 'bg-white';
 
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr class='$style '>";
@@ -161,10 +165,18 @@ if ($resultUser->num_rows > 0) {
                                 echo "<td class='py-2 px-4 border-r'>" . $row['nombre'] . "</td>";
                                 echo "<td class='py-2 px-4 border-r'>" . $row['cantidad_alumnos'] . " </td>"; 
                                 echo "<td class='py-2 px-4 border-r flex items-center justify-center gap-3'>";
-                                echo "<button class='text-blue-500 hover:underline flex items-center justify-center' id='modalUpdateToggle' onclick='openUpdateModal(this)'><img src='../../assets/edit.svg' alt='edit'></button>";
-                                echo " <form action='./delete_clases.php' method='post' class='flex items-center justify-center'>  <input type='hidden' class='editId'' name='editId'> <button class='deleteBtn text-red-500 hover:underline ml-2' ><img src='../../assets/delete.svg' alt='delete'></button> </form> ";
+                                echo "<button class='text-blue-500 hover:underline flex items-center justify-center updateModal'>
+                                <img src='../../assets/edit.svg' alt='edit'>
+                                </button>";
+                                echo " <form action='./delete_clases.php' method='post' class='flex items-center justify-center'>  
+                                <input type='hidden' class='editId'' name='editId'> 
+                                <button class='deleteBtn text-red-500 hover:underline ml-2' >
+                                <img src='../../assets/delete.svg' alt='delete'>
+                                </button> 
+                                </form> ";
                                 echo "</td>";
                                 echo " </tr>";
+
                                 $style = ($style == 'bg-white') ? 'bg-gray-200' : 'bg-white';
                             }
                             $result->free();

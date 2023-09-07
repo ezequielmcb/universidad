@@ -17,13 +17,16 @@ $resultmateria = $mysqli->query($materiaquery);
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/dist//output.css">
     <script src="../../accions/modal_profesor.js" defer></script>
     <script src="../../accions/modal_salir.js" defer></script>
+    <title>Administrador</title>
 </head>
+
 <body>
     <div class="w-screen h-screen flex">
         <div class="flex h-full bg-blue-900 text-white w-60  py-6 flex-col justify-between">
@@ -63,12 +66,15 @@ $resultmateria = $mysqli->query($materiaquery);
                     </a>
                 </div>
                 <div class=" flex flex-row justify-between items-center">
-                <button id="buttonToggle" class="relative flex justify-center items-center group">
+                    <button id="buttonToggle" class="relative flex justify-center items-center group">
                         <p class="px-4"> administrador </p>
                         <div id="toggleMenu" class=" absolute top-full min-w-full w-max bg-white mt-1 rounded hidden">
                             <ul class="text-left border none">
-                                <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../../assets/person.svg" alt="">
-                                    Perfil </li>
+                                <a href="../perfil_admin.php">
+                                    <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../../assets/person.svg" alt="">
+                                        Perfil
+                                    </li>
+                                </a>
                                 <a href="../../accions/logout.php">
                                     <li class="px-4 py-1 border-b flex flex-row gap-3"><img src="../../assets/cerrar.svg" alt="">
                                         Salir
@@ -179,7 +185,7 @@ $resultmateria = $mysqli->query($materiaquery);
                     </div>
                     <table class=" w-full border-collapse border" id="tablaMaestros">
                         <thead>
-                            <tr class="bg-gray-100">
+                            <tr class="bg-gray-200">
                                 <th class="py-2 px-4 border-r">id</th>
                                 <th class="py-2 px-4 border-r">Nombre</th>
                                 <th class="py-2 px-4 border-r">Apellido</th>
@@ -192,10 +198,12 @@ $resultmateria = $mysqli->query($materiaquery);
                         </thead>
                         <tbody>
                             <?php
+
+                            $style = 'bg-white';
+
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
-
-                                    echo '<tr class="bg-white">';
+                                    echo "<tr class='$style '>";
                                     echo "<td class='py-2 px-4 border-r'>" . $row['id_user'] . "</td>";
                                     echo "<td class='py-2 px-4 border-r'>" . $row['nombre'] . "</td>";
                                     echo "<td class='py-2 px-4 border-r'>" . $row['apellido'] . "</td>";
@@ -203,11 +211,17 @@ $resultmateria = $mysqli->query($materiaquery);
                                     echo "<td class='py-2 px-4 border-r'>" . $row['direccion'] . "</td>";
                                     echo "<td class='py-2 px-4 border-r'>" . $row['fecha_nacimiento'] . "</td>";
                                     echo "<td class='py-2 px-4 border-r'>" . $row['materia'] . "</td>";
-                                    echo '<td class="py-2 px-4 border-r flex flex-row">';
-                                    echo '<button class="text-blue-500 hover:underline" onclick="openUpdateModal(this)">Editar</button>';
-                                    echo '<button class="text-red-500 hover:underline ml-2">Eliminar</button>';
+                                    echo '<td class="py-2 px-4 border-r flex items-center justify-center">';
+                                    echo '<button class="text-blue-500 hover:underline" onclick="openUpdateModal(this)"><img src="../../assets/edit.svg" alt=""></button>';
+                                    echo " <form action='./delete_profe.php' method='post' class='flex items-center justify-center'>  
+                                <input type='hidden' class='editId'' name='editId'> 
+                                <button class='deleteBtn text-red-500 hover:underline ml-2' >
+                                <img src='../../assets/delete.svg' alt='delete'>
+                                </button> 
+                                </form> ";
                                     echo '</td>';
                                     echo '</tr>';
+                                    $style = ($style == 'bg-white') ? 'bg-gray-200' : 'bg-white';
                                 }
                             } else {
                                 echo '<tr class="bg-white">';

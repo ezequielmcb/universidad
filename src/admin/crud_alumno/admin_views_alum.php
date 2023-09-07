@@ -14,6 +14,7 @@ if ($_SESSION['user']['rol_id'] != 1) {
     <link rel="stylesheet" href="/dist//output.css">
     <script src="../../accions/modales.js" defer></script>
     <script src="../../accions/modal_salir.js" defer></script>
+    <title>Administracion</title>
 </head>
 
 <body>
@@ -60,8 +61,11 @@ if ($_SESSION['user']['rol_id'] != 1) {
                         <div id="toggleMenu" class=" absolute top-full min-w-full w-max bg-white mt-1 rounded hidden">
 
                             <ul class="text-left border none">
-                                <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../../assets/person.svg" alt="">
-                                    Perfil </li>
+                            <a href="../perfil_admin.php">
+                                    <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../../assets/person.svg" alt="">
+                                        Perfil
+                                    </li>
+                                </a>
                                 <a href="../../accions/logout.php">
                                     <li class="px-4 py-1 border-b flex flex-row gap-3"><img src="../../assets/cerrar.svg" alt="">
                                         Salir
@@ -129,7 +133,7 @@ if ($_SESSION['user']['rol_id'] != 1) {
                     </div>
                     <table class="w-full border-collapse border mt-4">
                         <thead>
-                            <tr class="bg-gray-100 ">
+                            <tr class="bg-gray-200 ">
                                 <th class="py-2 px-4 border-r">#</th>
                                 <th class="py-2 px-4 border-r">DNI</th>
                                 <th class="py-2 px-4 border-r">Nombre</th>
@@ -148,7 +152,7 @@ if ($_SESSION['user']['rol_id'] != 1) {
                             $query  = "SELECT `id_user`,`dni`,`nombre`,`apellido`, `email`,`direccion`,`fecha_nacimiento` FROM usuarios LEFT Join login_user on id_user = id_users WHERE rol_id = 3;";
                             $result = $mysqli->query($query);
 
-                            $style = 'bg-gray-200';
+                            $style = 'bg-white';
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr class='$style '>";
                                 echo "<td class='py-2 px-4 border-r'>" . $row['id_user'] . "</td>";
@@ -165,16 +169,13 @@ if ($_SESSION['user']['rol_id'] != 1) {
                                 echo "</tr>";
                                 $style = ($style == 'bg-white') ? 'bg-gray-200' : 'bg-white';
                             }
-                            
                             $result->free();
                             ?>
-                        
                         </tbody>
                     </table>
                     <div id="modalEdt" class="hidden fixed top-0 left-0 w-full h-full flex justify-center items-center bg-opacity-50 bg-black">
                         <div class="bg-white p-8 rounded shadow-lg w-1/2">
                             <h2 class="text-2xl font-semibold mb-4">Actualizar Alumno</h2>
-
                             <form action="./editar_alumno.php" method="POST">
                                 <input type="hidden" id="editId" name="editId">
                                 <div class="mb-2">

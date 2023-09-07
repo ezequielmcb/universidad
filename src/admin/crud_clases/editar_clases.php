@@ -3,6 +3,7 @@
 include('../../accions/connection.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    var_dump($_POST);
     try {
         $materia =  $_POST['newMateria'];
         $profesor =  $_POST['newProfe'];

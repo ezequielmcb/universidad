@@ -4,19 +4,19 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 3) {
     header('Location: ../../index.php');
     exit();
 }
-include("../accions/connection.php");
-
 
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/dist//output.css">
     <script src="../accions/modal_salir.js" defer></script>
 </head>
+
 <body>
     <div class="w-screen h-screen flex">
         <div class="flex h-full bg-blue-900 text-white w-60  py-6 flex-col justify-between">
@@ -28,7 +28,7 @@ include("../accions/connection.php");
                 <div class="border-t border-white mb-2 pt-4 text-sm">Alumno <br> <span> Nombre</span></div>
                 <div class="border-t border-white pt-4 text-sm ">Menu Alumno</div>
                 <div class="mt-6 space-y-2">
-                    <a href="./Alumno_Calif.php" class=" flex flex-row justify-center  group">
+                    <a href="./alumno_materias.php" class=" flex flex-row justify-center  group">
                         <img src="../assets/alumno.svg" alt="" height="32px" width="32px">
                         <p class="px-4"> Alumnos </p>
                     </a>
@@ -52,13 +52,15 @@ include("../accions/connection.php");
                     </button>
                 </div>
                 <div class=" flex flex-row justify-between items-center">
-                     <button id="buttonToggle" class="relative flex justify-center items-center group">
+                    <button id="buttonToggle" class="relative flex justify-center items-center group">
                         <p class="px-4"> Alumno </p>
                         <div id="toggleMenu" class=" absolute top-full min-w-full w-max bg-white mt-1 rounded hidden">
 
                             <ul class="text-left border none">
-                                <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../assets/person.svg" alt="">
-                                    Perfil </li>
+                                <a href="./perfil_alumno.php">
+                                    <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../assets/person.svg" alt="">
+                                        Perfil </li>
+                                </a>
                                 <a href="../accions/logout.php">
                                     <li class="px-4 py-1 border-b flex flex-row gap-3"><img src="../assets/cerrar.svg" alt="">
                                         Salir

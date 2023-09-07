@@ -17,6 +17,8 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 2) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/dist//output.css">
     <script src="../accions/modal_salir.js" defer></script>
+    <title>Maestro</title>
+
 </head>
 
 <body>
@@ -58,13 +60,15 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['rol_id'] != 2) {
                     </button>
                 </div>
                 <div class=" flex flex-row justify-between items-center">
-                <button id="buttonToggle" class="relative flex justify-center items-center group">
+                    <button id="buttonToggle" class="relative flex justify-center items-center group">
                         <p class="px-4"> Maestro </p>
                         <div id="toggleMenu" class=" absolute top-full min-w-full w-max bg-white mt-1 rounded hidden">
 
                             <ul class="text-left border none">
-                                <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../assets/person.svg" alt="">
-                                    Perfil </li>
+                                <a href="./perfil_profesor.php">
+                                    <li class="px-4 py-1 border-b flex flex-row gap-3"> <img src="../assets/person.svg" alt="">
+                                        Perfil </li>
+                                </a>
                                 <a href="../accions/logout.php">
                                     <li class="px-4 py-1 border-b flex flex-row gap-3"><img src="../assets/cerrar.svg" alt="">
                                         Salir

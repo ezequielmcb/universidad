@@ -9,7 +9,6 @@ function abrirModal(button) {
     calificacionIdField.value = calificacionId;
 }
 
-
 function cerrarModal() {
     const modal = document.getElementById('modal');
 
